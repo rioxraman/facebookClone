@@ -1,0 +1,27 @@
+{
+  "name": "facebookclone",
+  "version": "1.0.0",
+  "description": "facebook clone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rioxraman/facebookClone.git"
+  },
+  "keywords": [
+    "fa",
+    "facebook"
+  ],
+  "author": "raman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rioxraman/facebookClone/issues"
+  },
+  "homepage": "https://github.com/rioxraman/facebookClone#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
