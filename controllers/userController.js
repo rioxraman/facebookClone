@@ -1,9 +1,18 @@
 const User = require("../models/user")
 
 const profile = function (req,res) {
-    return res.render('user_profile',{
-        title:"HOME"
-    })
+    if(req.cookies.user_id){
+        User.findById(req.cookies.user_id,function(err,user){
+            if(user){
+                return res.render('user_profile',{
+                    title:"HOME",
+                    user:user
+                })
+            }
+        })
+    }
+
+    
 }
 
 const signUp = function (req,res) {
