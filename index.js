@@ -1,16 +1,40 @@
 const express = require('express')
 const app = express()
-const cookieParser = require('cookie-parser') //1
+const path = require('path')
+var passport = require('passport');
+var session = require('express-session');
+const MongoStore = require('connect-mongo');
+const cookieParser = require('cookie-parser') 
+const passportLocal = require('./config/passport-local');
 const port = 3000
 const expressLayouts = require('express-ejs-layouts');//1
 const db = require('./config/mongoose')
 app.set('view engine', 'ejs');
 app.set('views', './views');
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'facebook',
+  resave: false,
+  saveUninitialized: false,
+  cookie:{
+    maxAge:(1000*60*90)
+  },
+  store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1:27017/facebookClone' })
+  
+}));
+app.use(passport.authenticate('session'));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(passport.setAuthenticatedUser);
+
 app.use(express.urlencoded()) // form submit 
 app.use(cookieParser())
 const router = require('./routes/')
 app.use(expressLayouts)
 app.use('/', router)
+
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
 
