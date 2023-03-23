@@ -39,4 +39,9 @@ const login = function (req,res) {
     return res.redirect('/');
 }
 
-module.exports = {profile,signUp,signIn,create,login}
+const logout = function (req,res) {
+    //action pending
+    req.logout();
+    return res.redirect('/');
+}
+module.exports = {profile,signUp,signIn,create,login,logout}
