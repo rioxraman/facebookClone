@@ -6,5 +6,5 @@ const postsController = require('../controllers/postController');
 
 router.post('/create', postsController.create);
 router.get('/destroy/:id', postsController.destroy);
-
+         
 module.exports = router;
