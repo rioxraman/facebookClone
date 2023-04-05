@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const path = require('path')
+const path =require('path')
 var passport = require('passport');
 var session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -31,6 +31,7 @@ app.use(passport.setAuthenticatedUser);
 
 app.use(express.urlencoded()) // form submit 
 app.use(cookieParser())
+app.use(express.static('assets'))
 const router = require('./routes/')
 app.use(expressLayouts)
 app.use('/', router)

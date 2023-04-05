@@ -1,10 +1,24 @@
 const User = require("../models/user")
 
 const profile = function (req,res) {
-    return res.render('user_profile',{
-        title:"raman"
+    User.findById(req.params.id,function(err,user){
+        return res.render('user_profile',{
+            title:"raman",
+            profile_user:user
+        })
     })
+    
 }
+const update = function(req, res){
+    if(req.user.id == req.params.id){
+        User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+            return res.redirect('back');
+        });
+    }else{
+        return res.status(401).send('Unauthorized');
+    }
+}
+
 
 const signUp = function (req,res) {
     return res.render('signup',{
@@ -41,7 +55,9 @@ const login = function (req,res) {
 
 const logout = function (req,res) {
     //action pending
-    req.logout();
-    return res.redirect('/');
+    req.logout(function(err) {
+        if (err) { return next(err); }
+        res.redirect('/');
+      });
 }
-module.exports = {profile,signUp,signIn,create,login,logout}
+module.exports = {profile,signUp,signIn,create,login,logout,update}
